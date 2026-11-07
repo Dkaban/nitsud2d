@@ -23,6 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check editor JavaScript syntax
+        run: node --check src/editor.js
+      - name: Verify entry points
+        run: |
+          test -f index.html
+          test -f src/editor.js
+          grep -q 'src="./src/editor.js"' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site files
